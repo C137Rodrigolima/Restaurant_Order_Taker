@@ -44,7 +44,7 @@ export default function SignUp(){
       delete formData.confirmation;
       await api.register({ ...formData });
       setDisabled(false);
-      navigate("/signin");
+      navigate("/");
     } catch (error) {
       if(error.response.status === 409){
         alert("Unauthorized. Email already registered.")
@@ -92,7 +92,7 @@ export default function SignUp(){
           required
         />
         <InteractBox>
-          <StyledLink to={"/signin"}>Switch back to login</StyledLink>
+          <StyledLink to={"/"}>Switch back to login</StyledLink>
           <Button disabled={disabled}>REGISTER</Button>
         </InteractBox>
       </FormContainer>

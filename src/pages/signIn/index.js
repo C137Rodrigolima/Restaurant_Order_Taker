@@ -23,7 +23,7 @@ export default function SignIn(){
 
   useEffect(()=>{
     if(token){
-      navigate("/")
+      navigate("/menu")
     }
   }, [])
 
@@ -41,7 +41,7 @@ export default function SignIn(){
       
       persistToken(data);
       setDisabled(false);
-      navigate("/");
+      navigate("/menu");
     } catch (error) {
         console.log(error);
         alert("Could not login. Try later.");
