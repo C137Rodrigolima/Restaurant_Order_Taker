@@ -20,9 +20,28 @@ async function login(body) {
   return response;
 }
 
+async function AdmLogin(body) {
+  const response = await axios.post(`${BASE_URL}/adm/login`, body);
+  return response;
+}
+
 async function postOrder(body, token){
   const config = createConfig(token);
   const response = await axios.post(`${BASE_URL}/order`, body, config);
+
+  return response;
+}
+
+async function getOrder(token){
+  const config = createConfig(token);
+  const response = await axios.get(`${BASE_URL}/order/client`, config);
+
+  return response;
+}
+
+async function getAllOrders(token){
+  const config = createConfig(token);
+  const response = await axios.get(`${BASE_URL}/order/adm`, config);
 
   return response;
 }
@@ -31,5 +50,8 @@ export const api = {
   get,
   register,
   login,
-  postOrder
+  AdmLogin,
+  postOrder,
+  getOrder,
+  getAllOrders
 }

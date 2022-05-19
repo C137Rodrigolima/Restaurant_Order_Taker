@@ -1,7 +1,11 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { api } from "../../services/api";
+import { io } from "socket.io-client";
+import { api, BASE_URL } from "../../services/api";
 import useAuth from "../../hooks/useAuth";
+import { StyledLink } from "../../FormComponents";
+
+const socket = io(BASE_URL);
 
 export default function Main(){
   const {token} = useAuth();
@@ -15,11 +19,18 @@ export default function Main(){
   ])
   const [clientTable, setClientTable] = useState("");
 
-  useEffect(()=> getOptions, []);
+  useEffect(()=> getOptions(), [token]);
 
-  async function getOptions(){
-    const {data} = await api.get();
-    setOptions(data);
+  function getOptions(){
+    const promise = api.get();
+    
+    promise.then((response)=>{
+      console.log(response.data);
+      setOptions(response.data);
+    }).catch ((error)=> {
+      console.log(error);
+      alert("Could not load options");
+    })
   }
 
   async function handleOption(id){
@@ -53,17 +64,17 @@ export default function Main(){
       confirmAction();
       return;
     }
-    const response = await api.postOrder({
+    try {
+      await api.postOrder({
       table: clientTable,
       optionsIds: order
-    }, token);
-
-    if(response.status === 201){
+      }, token);
+      socket.emit("new_order");
       navigate("/menu/waiting");
-    } else {
-      console.log("could not place order. Try again");
+    } catch (error) {
+      console.log(error);
+      alert("could not place order. Try again");
     }
-
   }
 
   function confirmAction() {
@@ -77,13 +88,14 @@ export default function Main(){
     return;
   }
 
-  if(setOptions.length === 0){
+  if(options.length === 0){
     return <div>Loading...</div>
   }
 
   return (
     <>
       <Link to={"/"}>First time? Create an account!</Link>
+      <StyledLink to={"/adm/signin"}>Adm-login</StyledLink>
       <div>Main</div>
       <form onSubmit={(e)=>submitOrder(e)}>
         <input 
