@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { io } from "socket.io-client";
 import useAuth from "../../hooks/useAuth";
 import { api, BASE_URL } from "../../services/api";
+import { Container, OptionBox, OptionsContainer } from "./style";
 
 const socket = io.connect(BASE_URL);
 
@@ -57,21 +58,25 @@ export default function Kitchen(){
   }
 
   return(
-    <>
-    <button onClick={()=> logout()}>Logout</button>
-    <div>Kitchen</div>
-    <div>Client's Orders:</div>
+    <Container>
+    <h1>Kitchen</h1>
+    <h1>Client's Orders:</h1>
     {
     orders.map((order)=>
       <>
-      <div key={order.id}>
-        {order.optionOrder[0].option.name}
-        <button onClick={()=> handleOrder(order.table, order.id)}>SendTest</button>
-      </div>
-      <br />
+      <OptionsContainer key={order.id}>
+        <div>{`Table: ${order.table}`}</div>
+        <button onClick={()=> handleOrder(order.table, order.id)}>Order Done</button>
+        {order.optionOrder.map((each) =>
+        <OptionBox>
+          {each.option.name}
+        </OptionBox>
+        )
+        }
+      </OptionsContainer>
       </>
     )
     }
-    </>
+    </Container>
   );
 }

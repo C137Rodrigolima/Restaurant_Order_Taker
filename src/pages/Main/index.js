@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { io } from "socket.io-client";
 import { api, BASE_URL } from "../../services/api";
 import useAuth from "../../hooks/useAuth";
 import { StyledLink } from "../../FormComponents";
+import { Container, FormContainer, Menu, OptionBox, OptionButton, OptionsContainer, Table } from "./style";
 
 const socket = io(BASE_URL);
 
@@ -80,7 +81,7 @@ export default function Main(){
   function confirmAction() {
     let confirmAction = window
     .confirm("Not logged yet, pls do Log in before ;)");
-    
+
     if (confirmAction) {
       setDisabled(false);
       navigate("/");
@@ -94,12 +95,18 @@ export default function Main(){
   }
 
   return (
-    <>
-      <Link to={"/"}>First time? Create an account!</Link>
-      <StyledLink to={"/adm/signin"}>Adm-login</StyledLink>
-      <div>Main</div>
-      <form onSubmit={(e)=>submitOrder(e)}>
+    <Container>
+      <Menu>
+        <div></div>
+        <h1>Menu</h1>
+        <div>
+          <StyledLink to={"/"}>User-Login</StyledLink>
+          <StyledLink to={"/adm/signin"}>Adm-login</StyledLink>
+        </div>
+      </Menu>
+      <FormContainer onSubmit={(e)=>submitOrder(e)}>
         <input 
+          autoComplete="off"
           placeholder="Your Table"
           type="text"
           onChange={()=>{}}
@@ -113,9 +120,9 @@ export default function Main(){
         <div>
           {
             allTables.map((table) =>
-              <div key={table} onClick={()=> handleTable(table)}>
+              <Table key={table} onClick={()=> handleTable(table)}>
                 {table}
-              </div>
+              </Table>
             )
           }
         </div>
@@ -123,17 +130,20 @@ export default function Main(){
         <></>
         }
         <button type="submit" disabled={disabled}>Send Order</button>
-      </form>
+      </FormContainer>
+      <OptionsContainer>
       {
         options.map((option)=> 
-          <div key={option.id}>
-            {option.name}
-            <button onClick={() => handleOption(option.id)}>
+          <OptionBox key={option.id}>
+            <OptionButton onClick={() => handleOption(option.id)}>
               {`Pedir ${option.id}`}
-            </button>
-          </div>
+            </OptionButton>
+            <img src={option.image} height={"50px"} width={"50px"}/>
+            <h2>{option.name}</h2>
+          </OptionBox>
         )
       }
-    </>
+      </OptionsContainer>
+    </Container>
   );
 }

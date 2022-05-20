@@ -3,6 +3,7 @@ import { io } from "socket.io-client";
 import { api, BASE_URL } from "../../services/api";
 import useAuth from "../../hooks/useAuth.js"
 import { useNavigate } from "react-router-dom";
+import { Container, OptionBox, OptionsContainer } from "./style";
 
 const socket = io.connect(BASE_URL);
 
@@ -49,19 +50,22 @@ export default function WaitPage(){
   }
 
   return (
-    <>
-      <div>Seu Pedido</div>
-      <div>Avisaremos por aqui quando estiver pronto :)</div>
-      <div>{`Client Table: ${order.table}`}</div>
+    <Container>
+
+      <h1>Seu Pedido</h1>
+      <h1>Avisaremos por aqui quando estiver pronto :)</h1>
+      <OptionsContainer>
+      <h4>{`Client Table: ${order.table}`}</h4>
       {
         order.optionOrder.map((each) =>
-        <div key={each.option.id}>
-          <div>{each.option.name}</div>
+        <OptionBox key={each.option.id}>
           <img src={each.option.image} height={"50px"} width={"50px"}/>
+          <div>{each.option.name}</div>
 
-        </div>
+        </OptionBox>
         )
       }
-    </>
+      </OptionsContainer>
+    </Container>
   );
 }
