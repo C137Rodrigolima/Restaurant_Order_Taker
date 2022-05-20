@@ -80,6 +80,7 @@ export default function Main(){
   function confirmAction() {
     let confirmAction = window
     .confirm("Not logged yet, pls do Log in before ;)");
+    
     if (confirmAction) {
       setDisabled(false);
       navigate("/");

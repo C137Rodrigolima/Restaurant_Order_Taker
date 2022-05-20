@@ -37,7 +37,6 @@ export default function SignIn(){
     setDisabled(true);
     try {
       const { data } = await api.login({ ...formData });
-      console.log(data);
       
       persistToken(data);
       setDisabled(false);

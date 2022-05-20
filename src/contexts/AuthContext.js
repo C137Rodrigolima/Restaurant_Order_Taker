@@ -19,8 +19,10 @@ export function AuthProvider({ children }) {
 
   function signOut(){
     setToken(null);
-    setAdmToken(null);
     localStorage.removeItem("auth-token-R_O_T");
+  }
+  function signOutAdm(){
+    setAdmToken(null);
     localStorage.removeItem("ADM_auth-token-R_O_T");
   }
 
@@ -34,7 +36,7 @@ export function AuthProvider({ children }) {
   }, [localToken, admLocalToken]);
 
   return (
-    <AuthContext.Provider value={{ token, admToken, persistToken, persistAdmToken, signOut }}>
+    <AuthContext.Provider value={{ token, admToken, persistToken, persistAdmToken, signOut, signOutAdm }}>
       {children}
     </AuthContext.Provider>
   );

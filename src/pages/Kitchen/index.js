@@ -24,12 +24,9 @@ export default function Kitchen(){
       alert("Could not find orders");
     })
   }
-  //SALVAR  os pedidos em um objeto e só atualizaro objeto adicionando os novos pedidos, igual uma mensagem nova...
-  //ver como fazer isso considerando que tem que ficar no banco também, como a mensagem fica salva para o Indiano;
   
   socket.on("new_order_arrived", ()=>{
-    const test = reload;
-    setReload(!test);
+    update();
   })
 
   useEffect(()=>{
@@ -47,10 +44,14 @@ export default function Kitchen(){
     navigate("/adm/signin");
   }
 
+  function update(){
+    setReload(!reload);
+  }
+
   if(orders.length === 0){
     return (
       <>
-        <div>Waiting...</div>
+        <div>Waiting new orders...</div>
       </>
     )
   }
@@ -58,7 +59,6 @@ export default function Kitchen(){
   return(
     <>
     <button onClick={()=> logout()}>Logout</button>
-    <button onClick={()=> console.log("vendo se faz console")}>Teste do ADM</button>
     <div>Kitchen</div>
     <div>Client's Orders:</div>
     {
