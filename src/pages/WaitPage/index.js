@@ -3,7 +3,7 @@ import { io } from "socket.io-client";
 import { api, BASE_URL } from "../../services/api";
 import useAuth from "../../hooks/useAuth.js"
 import { useNavigate } from "react-router-dom";
-import { Container, OptionBox, OptionsContainer } from "./style";
+import { Container, Menu, Nav, OptionBox, OptionsContainer, OptionsContent } from "./style";
 
 const socket = io.connect(BASE_URL);
 
@@ -11,11 +11,18 @@ export default function WaitPage(){
   const navigate = useNavigate();
   const {token, signOut} = useAuth();
   const [order, setOrder] = useState({});
+  const [price, setPrice] = useState(0);
+
+  useEffect(()=> {
+    getOrder();  
+  }, [token]);
 
   async function getOrder(){
     const promise = api.getOrder(token);
 
     promise.then((response) => {
+      const totalPrice = calcPrice(response.data.optionOrder);
+      setPrice(totalPrice);
       setOrder(response.data);
       socket.emit("join_table", response.data.table);
     }).catch ((error)=> {
@@ -24,9 +31,13 @@ export default function WaitPage(){
     })
   };
 
-  useEffect(()=> {
-    getOrder();  
-  }, [token]);
+  function calcPrice(orders){
+    let total = 0;
+    for(let i=0; i<orders.length; i++){
+      total += parseFloat(orders[i].option.price);
+    }
+    return total;
+  }
 
   socket.on("Order_Coming", (data)=>{
     confirmAndLogout(data);
@@ -51,20 +62,24 @@ export default function WaitPage(){
 
   return (
     <Container>
-
-      <h1>Seu Pedido</h1>
-      <h1>Avisaremos por aqui quando estiver pronto :)</h1>
+      <Nav>
+        <Menu>
+        <h1>Avisaremos por aqui quando estiver pronto :)</h1>
+        </Menu>
+      </Nav>
+      
       <OptionsContainer>
-      <h4>{`Client Table: ${order.table}`}</h4>
+      <h2>{`Sua mesa: ${order.table}`}</h2>
+      <h2>Seu Pedido:</h2>
       {
         order.optionOrder.map((each) =>
         <OptionBox key={each.option.id}>
-          <img src={each.option.image} height={"50px"} width={"50px"}/>
-          <div>{each.option.name}</div>
-
+          <img src={each.option.image} alt={each.option.name}/>
+          <OptionsContent>{each.option.name}</OptionsContent>
         </OptionBox>
         )
       }
+      <h2>{`Total: R$ ${price.toString().replace(".", ",")}`}</h2>
       </OptionsContainer>
     </Container>
   );

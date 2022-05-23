@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { io } from "socket.io-client";
 import useAuth from "../../hooks/useAuth";
 import { api, BASE_URL } from "../../services/api";
-import { Container, OptionBox, OptionsContainer } from "./style";
+import { Container, Menu, Nav, OptionBox, OptionButton, OptionsContainer, OptionsContent, TableBox } from "./style";
 
 const socket = io.connect(BASE_URL);
 
@@ -51,32 +51,47 @@ export default function Kitchen(){
 
   if(orders.length === 0){
     return (
-      <>
-        <div>Waiting new orders...</div>
-      </>
+      <Container>
+        <Nav>
+          <Menu>
+            <h1>Esperando pedidos</h1>
+          </Menu>
+        </Nav>
+        <OptionsContainer>
+          <h2>Pedidos dos Clientes:</h2>
+        </OptionsContainer>
+      </Container>
     )
   }
 
   return(
     <Container>
-    <h1>Kitchen</h1>
-    <h1>Client's Orders:</h1>
-    {
-    orders.map((order)=>
-      <>
-      <OptionsContainer key={order.id}>
-        <div>{`Table: ${order.table}`}</div>
-        <button onClick={()=> handleOrder(order.table, order.id)}>Order Done</button>
-        {order.optionOrder.map((each) =>
-        <OptionBox>
-          {each.option.name}
+      <Nav>
+        <Menu>
+          <div></div>
+          <h1>Cozinha</h1>
+          <h2 onClick={()=>logout()}>Sair</h2>
+        </Menu>
+      </Nav>
+      <OptionsContainer>
+        <h2>Pedidos dos Clientes:</h2>
+      {orders.map((order)=>
+        <OptionBox key={order.id}>
+          <TableBox>{order.table}</TableBox>
+          <OptionsContent>
+            Pratos:
+          {order.optionOrder.map((each) =>
+            <li key={each.option.id}>
+              {each.option.name}
+            </li>
+          )}
+          </OptionsContent>
+          <OptionButton onClick={()=> handleOrder(order.table, order.id)}>
+            Pronto
+          </OptionButton>
         </OptionBox>
-        )
-        }
+      )}
       </OptionsContainer>
-      </>
-    )
-    }
     </Container>
   );
 }

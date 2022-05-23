@@ -4,7 +4,9 @@ import { io } from "socket.io-client";
 import { api, BASE_URL } from "../../services/api";
 import useAuth from "../../hooks/useAuth";
 import { StyledLink } from "../../FormComponents";
-import { Container, FormContainer, Menu, OptionBox, OptionButton, OptionsContainer, Table } from "./style";
+import { Container, FormContainer, Menu, Nav, OptionBox, OptionButton, OptionsContainer, OptionsContent, Table, Tables } from "./style";
+import { BiCheck } from "react-icons/bi";
+import { BiPlus } from "react-icons/bi";
 
 const socket = io(BASE_URL);
 
@@ -27,14 +29,32 @@ export default function Main(){
     
     promise.then((response)=>{
       console.log(response.data);
-      setOptions(response.data);
+      const allOptions = buttonsHandler(response.data);
+      setOptions(allOptions);
     }).catch ((error)=> {
       console.log(error);
       alert("Could not load options");
     })
   }
 
+  function buttonsHandler(allOptions){
+    allOptions.forEach(element => {
+      element.chosenOne = false;
+    });
+    return allOptions;
+  }
+
   async function handleOption(id){
+    let newArr = options.map((each)=>{
+      if(each.id === id) {
+        each.chosenOne = !each.chosenOne;
+        return each;
+      } else {
+        return each
+      }
+    })
+    setOptions(newArr);
+    
     if(order.includes(id)){
       const arr = order.filter((item) => {
         return item !== id
@@ -96,50 +116,67 @@ export default function Main(){
 
   return (
     <Container>
-      <Menu>
-        <div></div>
-        <h1>Menu</h1>
-        <div>
-          <StyledLink to={"/"}>User-Login</StyledLink>
-          <StyledLink to={"/adm/signin"}>Adm-login</StyledLink>
-        </div>
-      </Menu>
-      <FormContainer onSubmit={(e)=>submitOrder(e)}>
-        <input 
-          autoComplete="off"
-          placeholder="Your Table"
-          type="text"
-          onChange={()=>{}}
-          onClick={() => setOpenTable(!openTable)}
-          name="category"
-          value={clientTable}
-          required
-        />
-        { 
-        openTable?
-        <div>
-          {
-            allTables.map((table) =>
-              <Table key={table} onClick={()=> handleTable(table)}>
-                {table}
-              </Table>
-            )
+      <Nav>
+        <Menu>
+          <div></div>
+          <h1>Atendente de Pedidos do Restaurante</h1>
+          { token? 
+            <div></div>
+            :
+            <div>
+              <StyledLink to={"/"}>Login Usuário</StyledLink>
+              <StyledLink to={"/adm/signin"}>Login Adm</StyledLink>
+            </div>
           }
-        </div>
-        :
-        <></>
-        }
-        <button type="submit" disabled={disabled}>Send Order</button>
-      </FormContainer>
+        </Menu>
+        <FormContainer onSubmit={(e)=>submitOrder(e)}>
+          <input 
+            autoComplete="off"
+            placeholder="Sua Mesa"
+            type="text"
+            onChange={()=>{}}
+            onClick={() => setOpenTable(!openTable)}
+            name="category"
+            value={clientTable}
+            required
+          />
+          { 
+          openTable?
+          <Tables>
+            {
+              allTables.map((table) =>
+                <Table key={table} onClick={()=> handleTable(table)}>
+                  {table}
+                </Table>
+              )
+            }
+          </Tables>
+          :
+          <></>
+          }
+          <button type="submit" disabled={disabled}>Enviar Pedido</button>
+        </FormContainer>
+      </Nav>
+      
       <OptionsContainer>
+        <h1>Menu</h1>
       {
         options.map((option)=> 
           <OptionBox key={option.id}>
-            <OptionButton onClick={() => handleOption(option.id)}>
-              {`Pedir ${option.id}`}
+            <img src={option.image} alt={option.name}/>
+            <OptionsContent>
+              <h2>{option.name}</h2>
+              <h3>{`R$ ${option.price.replace('.', ',')}`}</h3>
+            </OptionsContent>
+            <OptionButton
+            IsTheChosenOne={option.chosenOne}
+            onClick={() => handleOption(option.id)}>
+              {option.chosenOne?
+                <BiCheck size={35}/>
+                :
+                <BiPlus size={30}/>
+              }
             </OptionButton>
-            <img src={option.image} height={"50px"} width={"50px"}/>
-            <h2>{option.name}</h2>
           </OptionBox>
         )
       }
