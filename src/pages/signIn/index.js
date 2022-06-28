@@ -40,7 +40,7 @@ export default function SignIn(){
       
       persistToken(data);
       setDisabled(false);
-      navigate("/menu");
+      navigate("/");
     } catch (error) {
         console.log(error);
         alert("Could not login. Try later.");

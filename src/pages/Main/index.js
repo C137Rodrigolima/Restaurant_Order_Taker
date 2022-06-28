@@ -3,15 +3,17 @@ import { useNavigate } from "react-router-dom";
 import { io } from "socket.io-client";
 import { api, BASE_URL } from "../../services/api";
 import useAuth from "../../hooks/useAuth";
-import { StyledLink } from "../../FormComponents";
-import { Container, FormContainer, Menu, Nav, OptionBox, OptionButton, OptionsContainer, OptionsContent, Table, Tables } from "./style";
+import { Container, FormContainer, Menu, Nav, StyledLink, OptionBox, OptionButton, OptionsContainer, OptionsContent, Table, Tables } from "./style";
+import { RiLogoutBoxRLine } from "react-icons/ri";
 import { BiCheck } from "react-icons/bi";
 import { BiPlus } from "react-icons/bi";
+import Bottom from "../../Components/Bottom";
+import Logo_ROT from "../../Assets/LOGO_R_O_T.png";
 
 const socket = io(BASE_URL);
 
 export default function Main(){
-  const {token} = useAuth();
+  const {token, signOut} = useAuth();
   const navigate = useNavigate();
   const [disabled, setDisabled] = useState(false);
   const [options, setOptions] = useState([]);
@@ -118,13 +120,15 @@ export default function Main(){
     <Container>
       <Nav>
         <Menu>
-          <div></div>
-          <h1>Atendente de Pedidos do Restaurante</h1>
+          <img src={Logo_ROT} />
+          <h1>Carlos's Restaurante</h1>
           { token? 
-            <div></div>
+            <span className="exit-icon" onClick={()=> signOut()}>
+              <RiLogoutBoxRLine color="white" size={30} />
+            </span>
             :
             <div>
-              <StyledLink to={"/"}>Login Usuário</StyledLink>
+              <StyledLink to={"/signin"}>Login Usuário</StyledLink>
               <StyledLink to={"/adm/signin"}>Login Adm</StyledLink>
             </div>
           }
@@ -159,7 +163,7 @@ export default function Main(){
       </Nav>
       
       <OptionsContainer>
-        <h1>Menu</h1>
+        <h1>Atendente de Pedidos do Restaurante</h1>
       {
         options.map((option)=> 
           <OptionBox key={option.id}>
@@ -181,6 +185,8 @@ export default function Main(){
         )
       }
       </OptionsContainer>
+
+      <Bottom />
     </Container>
   );
 }

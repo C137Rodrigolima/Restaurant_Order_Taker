@@ -25,7 +25,7 @@ export default function SignUp(){
 
   useEffect(()=>{
     if(token){
-      navigate("/")
+      navigate("/signin")
     }
   }, []);
 
@@ -92,7 +92,7 @@ export default function SignUp(){
           required
         />
         <InteractBox>
-          <StyledLink to={"/"}>Switch back to login</StyledLink>
+          <StyledLink to={"/signin"}>Switch back to login</StyledLink>
           <Button disabled={disabled}>REGISTER</Button>
         </InteractBox>
       </FormContainer>

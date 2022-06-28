@@ -9,7 +9,7 @@ const socket = io.connect(BASE_URL);
 
 export default function Kitchen(){
   const navigate = useNavigate();
-  const {admToken, signOut} = useAuth();
+  const {admToken, signOutAdm} = useAuth();
   const [orders, setOrders] = useState([]);
   const [reload, setReload] = useState(false);
 
@@ -41,7 +41,7 @@ export default function Kitchen(){
   }
 
   function logout(){
-    signOut();
+    signOutAdm();
     navigate("/adm/signin");
   }
 

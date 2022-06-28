@@ -1,12 +1,13 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 const Container = styled.div`
-  min-height: 100vh;
+  height: 100%;
   width: 100%;
-  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
+
   font-family: 'Roboto', sans-serif;
 
   background-color: #F1F1F1;
@@ -31,6 +32,9 @@ const Menu = styled.div`
   align-items: center;
 
   h1{
+    :hover{
+      cursor: pointer;
+    }
     font-size: 36px;
     color: #ffffff;
     word-wrap: wrap;
@@ -56,9 +60,24 @@ const Menu = styled.div`
   }
 `;
 
-const OptionsContainer = styled.div`
+const StyledLink = styled(Link)`
+  text-decoration: none;
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 24px;
+  
+  display: flex;
+  align-items: center;
+  letter-spacing: 0.15px;
+  
+  color: #ffffff;
+`;
+
+const ContentBox = styled.div`
   width: 700px;
-  padding: 120px 0px 55px;
+  padding: 100px 0px 25px;
 
   display: flex;
   flex-direction: column;
@@ -73,70 +92,22 @@ const OptionsContainer = styled.div`
   }
   h2{
     font-size: 22px;
-    font-weight: bold;
-  }
-  h3{
-    font-size: 22px;
-    color: green;
+    line-height: 29px;
   }
 
   @media (max-width: 705px){
     width: 100%;
   }
-`;
-
-const OptionBox = styled.div`
-  width: 100%;
-  height: 150px;
-
-  display: flex;
-  justify-content: space-between;
-  
-  border-radius: 5px;
-  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-  
-  background-color: #ffffff;
-  box-sizing: border-box;
-  img {
-    object-fit: cover;
-    width: 300px;
-    border-radius: 5px 0px 0px 5px;
-  }
-  @media (max-width: 705px){
+  @media (max-width: 400px){
     width: 100%;
-    height: 120px;
-    border-radius: 0px;
-    img{
-      width: 50vw;
-      height: 120px;
-      border-radius: 0px;
-    }
-  }
-`;
-
-const OptionsContent = styled.div`
-  width: 50%;
-  padding: 5px;
-
-  display: flex;
-
-  box-sizing: border-box;
-
-  font-size: 18px;
-  font-weight: bold;
-
-  h3{
-    font-size: 22px;
-    font-weight: bold;
-    color: green;
+    padding: 150px 0px 25px;
   }
 `;
 
 export {
-    Container,
-    Nav,
-    Menu,
-    OptionsContainer,
-    OptionBox,
-    OptionsContent
+  Container,
+  Nav,
+  StyledLink,
+  Menu,
+  ContentBox
 }
