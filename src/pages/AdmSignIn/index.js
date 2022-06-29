@@ -55,7 +55,7 @@ export default function AdmSignIn(){
   return (
     <Container>
       <FormContainer onSubmit={handleSubmit}>
-        <Title>Login</Title>
+        <Title>ADM Login</Title>
         <Input 
           placeholder="E-mail"
           type="email"
@@ -65,7 +65,7 @@ export default function AdmSignIn(){
           required
         />
         <Input 
-          placeholder="Password"
+          placeholder="Senha"
           type="password"
           onChange={(e) => handleChange(e)}
           name="password"
@@ -73,7 +73,7 @@ export default function AdmSignIn(){
           required
         />
         <InteractBox>
-          <StyledLink to={"/"}>Login as client to make your order</StyledLink>
+          <StyledLink to={"/signin"}>Login as client to make your order</StyledLink>
           <Button disabled={disabled}>LOGIN</Button>
         </InteractBox>
       </FormContainer>

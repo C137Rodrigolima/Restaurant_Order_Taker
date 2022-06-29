@@ -92,7 +92,7 @@ export default function Main(){
       optionsIds: order
       }, token);
       socket.emit("new_order");
-      navigate("/waiting-order");
+      navigate("/order-waiting");
     } catch (error) {
       console.log(error);
       alert("could not place order. Try again");

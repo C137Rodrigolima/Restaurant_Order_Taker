@@ -61,7 +61,7 @@ export default function SignIn(){
           required
         />
         <Input 
-          placeholder="Password"
+          placeholder="Senha"
           type="password"
           onChange={(e) => handleChange(e)}
           name="password"

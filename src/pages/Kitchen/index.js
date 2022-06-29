@@ -67,6 +67,7 @@ export default function Kitchen(){
         <OptionsContainer>
           <h2>Pedidos dos Clientes:</h2>
         </OptionsContainer>
+        <Bottom />
       </Container>
     )
   }
