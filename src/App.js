@@ -10,18 +10,20 @@ import SignUp from "./pages/signUp";
 import WaitPage from "./pages/WaitPage";
 import AdmSignIn from "./pages/AdmSignIn";
 import Kitchen from "./pages/Kitchen";
+import About from "./pages/About";
 
 export default function App() {
   return (
     <AuthProvider>
       <Router>
         <Routes>
-          <Route path="/" element={<SignIn />} />
+          <Route path="/signin" element={<SignIn />} />
           <Route path="/signup" element={<SignUp />} />
-          <Route path="/menu" element={<Main />}/>
-          <Route path="/menu/waiting" element={<WaitPage />}/>
+          <Route path="/" element={<Main />}/>
+          <Route path="/order-waiting" element={<WaitPage />}/>
           <Route path="/adm/signin" element={<AdmSignIn />} />
           <Route path="/adm/kitchen" element={<Kitchen />} />
+          <Route path="/about" element={<About />} />
         </Routes>
       </Router>
     </AuthProvider>

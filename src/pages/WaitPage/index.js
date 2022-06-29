@@ -4,6 +4,10 @@ import { api, BASE_URL } from "../../services/api";
 import useAuth from "../../hooks/useAuth.js"
 import { useNavigate } from "react-router-dom";
 import { Container, Menu, Nav, OptionBox, OptionsContainer, OptionsContent } from "./style";
+import { RiLogoutBoxRLine } from "react-icons/ri";
+import Bottom from "../../Components/Bottom";
+import Logo_ROT from "../../Assets/LOGO_R_O_T.png";
+
 
 const socket = io.connect(BASE_URL);
 
@@ -64,23 +68,29 @@ export default function WaitPage(){
     <Container>
       <Nav>
         <Menu>
-        <h1>Avisaremos por aqui quando estiver pronto :)</h1>
+        <img src={Logo_ROT} />
+        <h1>Carlos's Restaurante</h1>
+        <span className="exit-icon" onClick={()=> releaseLogout()}>
+          <RiLogoutBoxRLine color="white" size={30} />
+        </span>
         </Menu>
       </Nav>
       
       <OptionsContainer>
-      <h2>{`Sua mesa: ${order.table}`}</h2>
-      <h2>Seu Pedido:</h2>
-      {
-        order.optionOrder.map((each) =>
-        <OptionBox key={each.option.id}>
-          <img src={each.option.image} alt={each.option.name}/>
-          <OptionsContent>{each.option.name}</OptionsContent>
-        </OptionBox>
-        )
-      }
-      <h2>{`Total: R$ ${price.toString().replace(".", ",")}`}</h2>
+        <h1>Avisaremos por aqui quando estiver pronto ;)</h1>
+        <h2>Sua mesa: <b>{order.table}</b></h2>
+        <h2>Seu Pedido:</h2>
+        {
+          order.optionOrder.map((each) =>
+          <OptionBox key={each.option.id}>
+            <img src={each.option.image} alt={each.option.name}/>
+            <OptionsContent>{each.option.name}</OptionsContent>
+          </OptionBox>
+          )
+        }
+        <h3><b>Total: </b>R$ {price.toFixed(2).toString().replace(".", ",")}</h3>
       </OptionsContainer>
+      <Bottom />
     </Container>
   );
 }

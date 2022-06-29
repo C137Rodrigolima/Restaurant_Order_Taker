@@ -3,11 +3,13 @@ import styled from "styled-components";
 const Container = styled.div`
   min-height: 100vh;
   width: 100%;
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
+  font-family: 'Roboto', sans-serif;
 
-  background-color: #400102;
+  background-color: #F1F1F1;
 `;
 
 const Nav = styled.div`
@@ -18,12 +20,12 @@ const Nav = styled.div`
   position: fixed;
   z-index: 1;
 
-  background-color: #00131c;
+  background-color: #54030B;
 `;
 
 const Menu = styled.div`
   width: 700px;
-  padding: 15px 0px;
+  padding: 15px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -31,18 +33,31 @@ const Menu = styled.div`
   h1{
     font-size: 36px;
     color: #ffffff;
+    word-wrap: wrap;
   }
-  h2{
-    color: #ffffff;
+  img{
+    width: 50px;
+    height: 50px;
+    box-shadow: rgba(0, 0, 0, 0.5) 1.95px 1.95px 2.6px;
   }
-  @media (max-width: 700px){
+  .exit-icon{
+    :hover{
+      cursor: pointer;
+    }
+  }
+
+  @media (max-width: 755px){
     width: 100%;
+  }
+  @media (max-width: 550px){
+    width: 100%;
+    h1{font-size: 30px;}
   }
 `;
 
 const OptionsContainer = styled.div`
-  width: 500px;
-  padding: 75px 0px 25px;
+  width: 700px;
+  padding: 120px 0px 55px;
 
   display: flex;
   flex-direction: column;
@@ -52,28 +67,36 @@ const OptionsContainer = styled.div`
   gap: 10px;
 
   h2{
-    color: #ffffff;
+    height: 30px;
     font-size: 22px;
-
+    font-weight: bold;
   }
 
-  @media (max-width: 505px){
+  @media (max-width: 705px){
     width: 100%;
   }
 `;
 
 const TableBox = styled.div`
-  height: 120px;
+  height: 150px;
   width: 100px;
   font-size: 68px;
 
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: space-around;
   align-items: center;
+
+  border-right: 2px #BBBBBB solid;
+
+  h1{
+    font-size: 22px;
+    font-weight: bold;
+  }
 `;
 
 const OptionBox = styled.div`
-  width: 500px;
+  width: 100%;
 
   display: flex;
   justify-content: space-between;
@@ -82,6 +105,7 @@ const OptionBox = styled.div`
   border-radius: 5px;
 
   background-color: #ffffff;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   box-sizing: border-box;
 
   @media (max-width: 505px){
@@ -97,6 +121,11 @@ const OptionsContent = styled.div`
   display: flex;
   flex-direction: column;
   gap: 10px;
+
+  h1{
+    font-size: 22px;
+    font-weight: bold;
+  }
 `;
 
 const OptionButton = styled.button`
