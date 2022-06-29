@@ -57,7 +57,11 @@ export default function Kitchen(){
       <Container>
         <Nav>
           <Menu>
-            <h1>Esperando pedidos</h1>
+            <img src={Logo_ROT} />
+            <h1>Carlos's Cozinha</h1>
+            <span className="exit-icon" onClick={()=> logout()}>
+              <RiLogoutBoxRLine color="white" size={30} />
+            </span>
           </Menu>
         </Nav>
         <OptionsContainer>
