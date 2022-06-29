@@ -75,9 +75,18 @@ const OptionsContainer = styled.div`
     font-size: 22px;
     font-weight: bold;
   }
+  b{
+    font-size: 26px;
+    color: red;
+  }
   h3{
     font-size: 22px;
     color: green;
+    b{
+    font-size: 22px;
+    font-weight: bold;
+    color: #111111;
+    }
   }
 
   @media (max-width: 705px){

@@ -30,7 +30,6 @@ export default function Main(){
     const promise = api.get();
     
     promise.then((response)=>{
-      console.log(response.data);
       const allOptions = buttonsHandler(response.data);
       setOptions(allOptions);
     }).catch ((error)=> {
@@ -93,7 +92,7 @@ export default function Main(){
       optionsIds: order
       }, token);
       socket.emit("new_order");
-      navigate("/menu/waiting");
+      navigate("/waiting-order");
     } catch (error) {
       console.log(error);
       alert("could not place order. Try again");
@@ -101,12 +100,12 @@ export default function Main(){
   }
 
   function confirmAction() {
-    let confirmAction = window
+    let confirmaction = window
     .confirm("Not logged yet, pls do Log in before ;)");
 
-    if (confirmAction) {
+    if (confirmaction) {
       setDisabled(false);
-      navigate("/");
+      navigate("/signin");
     }
     setDisabled(false);
     return;

@@ -78,7 +78,7 @@ export default function WaitPage(){
       
       <OptionsContainer>
         <h1>Avisaremos por aqui quando estiver pronto ;)</h1>
-        <h2>{`Sua mesa: ${order.table}`}</h2>
+        <h2>Sua mesa: <b>{order.table}</b></h2>
         <h2>Seu Pedido:</h2>
         {
           order.optionOrder.map((each) =>
@@ -88,7 +88,7 @@ export default function WaitPage(){
           </OptionBox>
           )
         }
-        <h3>{`Total: R$ ${price.toFixed(2).toString().replace(".", ",")}`}</h3>
+        <h3><b>Total: </b>R$ {price.toFixed(2).toString().replace(".", ",")}</h3>
       </OptionsContainer>
       <Bottom />
     </Container>

@@ -1,9 +1,13 @@
 import { useEffect, useState } from "react";
+import { RiLogoutBoxRLine } from "react-icons/ri";
 import { useNavigate } from "react-router-dom";
 import { io } from "socket.io-client";
 import useAuth from "../../hooks/useAuth";
 import { api, BASE_URL } from "../../services/api";
 import { Container, Menu, Nav, OptionBox, OptionButton, OptionsContainer, OptionsContent, TableBox } from "./style";
+import Logo_ROT from "../../Assets/LOGO_R_O_T.png";
+import Bottom from "../../Components/Bottom";
+
 
 const socket = io.connect(BASE_URL);
 
@@ -17,7 +21,6 @@ export default function Kitchen(){
     const promise = api.getAllOrders(admToken);
 
     promise.then((response) =>{
-      console.log(response.data);
       socket.emit('join_table', ["A", "B", "C", "D", "E"])
       setOrders(response.data);
     }).catch ((error) => {
@@ -68,23 +71,28 @@ export default function Kitchen(){
     <Container>
       <Nav>
         <Menu>
-          <div></div>
-          <h1>Cozinha</h1>
-          <h2 onClick={()=>logout()}>Sair</h2>
+        <img src={Logo_ROT} />
+        <h1>Carlos's Cozinha</h1>
+        <span className="exit-icon" onClick={()=> logout()}>
+          <RiLogoutBoxRLine color="white" size={30} />
+        </span>
         </Menu>
       </Nav>
       <OptionsContainer>
         <h2>Pedidos dos Clientes:</h2>
       {orders.map((order)=>
         <OptionBox key={order.id}>
-          <TableBox>{order.table}</TableBox>
+          <TableBox>
+            <h1>Mesa:</h1>
+            {order.table}
+          </TableBox>
           <OptionsContent>
-            Pratos:
-          {order.optionOrder.map((each) =>
-            <li key={each.option.id}>
-              {each.option.name}
-            </li>
-          )}
+            <h1>Pedido:</h1>
+            {order.optionOrder.map((each) =>
+              <li key={each.option.id}>
+                {each.option.name}
+              </li>
+            )}
           </OptionsContent>
           <OptionButton onClick={()=> handleOrder(order.table, order.id)}>
             Pronto
@@ -92,6 +100,7 @@ export default function Kitchen(){
         </OptionBox>
       )}
       </OptionsContainer>
+      <Bottom />
     </Container>
   );
 }
