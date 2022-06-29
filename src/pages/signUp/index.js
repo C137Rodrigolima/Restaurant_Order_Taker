@@ -58,9 +58,9 @@ export default function SignUp(){
   return (
     <Container>
       <FormContainer onSubmit={handleSubmit}>
-        <Title>Register</Title>
+        <Title>Registro</Title>
         <Input 
-          placeholder="Name"
+          placeholder="Nome"
           type="name"
           onChange={(e) => handleChange(e)}
           name="name"
@@ -76,7 +76,7 @@ export default function SignUp(){
           required
         />
         <Input 
-          placeholder="Password"
+          placeholder="Senha"
           type="password"
           onChange={(e) => handleChange(e)}
           name="password"
