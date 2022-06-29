@@ -44,7 +44,7 @@ export default function SignUp(){
       delete formData.confirmation;
       await api.register({ ...formData });
       setDisabled(false);
-      navigate("/");
+      navigate("/signin");
     } catch (error) {
       if(error.response.status === 409){
         alert("Unauthorized. Email already registered.")
