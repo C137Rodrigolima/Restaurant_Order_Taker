@@ -83,3 +83,4 @@ AdmEmail: adm@email.com
 AdmPassword: adm
 ```
 8. Register as client on `userLogin`, choose your table, options from menu and see through the pages how they're connected.
+9. Remember to open in new tabs to simulate new user entries ;) enjoy...
