@@ -2,8 +2,8 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 const Container = styled.div`
-  height: 100%;
   width: 100%;
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -77,7 +77,7 @@ const StyledLink = styled(Link)`
 
 const ContentBox = styled.div`
   width: 700px;
-  padding: 100px 0px 25px;
+  padding: 100px 0px 55px;
 
   display: flex;
   flex-direction: column;
@@ -93,6 +93,13 @@ const ContentBox = styled.div`
   h2{
     font-size: 22px;
     line-height: 29px;
+  }
+  h3{
+    font-size: 18px;
+    line-height: 20px;
+    b{
+      font-weight: bold;
+    }
   }
 
   @media (max-width: 705px){

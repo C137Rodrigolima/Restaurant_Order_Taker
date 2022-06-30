@@ -38,6 +38,7 @@ export default function Kitchen(){
   }, [reload]);
 
   function handleOrder(table, orderId){
+    console.log(table, orderId);
     socket.emit("Finish_Order", {
       table: table, orderId: orderId
     });

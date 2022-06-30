@@ -31,11 +31,28 @@ export default function About(){
       <ContentBox>
         <h1>Qual o objetivo deste site:</h1>
         <h2>
-          Este site é um anotador de pedidos para um restaurante com páginas de cliente e administrador.</h2>
+          Este site tem o objetivo de fornecer uma resposta rápida para os pedidos dos clientes, 
+          uma necessidade em dobro para a cozinha de um restaurante, 
+          cuja cobrança por velocidade faz contar cada minuto.
+        </h2>
+        <h2>
+          Ao utilizar esse site o restaurante pode automatizar a experiência do usuário ao anotar seus 
+          pedidos, evitando erros e garantindo uma resposta mais rápida, 
+          alertando imediatamente a cozinha dos pedidos por mesa.
+        </h2>
+        <br />
+        <h1>Para testar:</h1>
+        <h2>Abra uma guia no login de usuário e outra como administrador, para testar a conexão entre a cozinha e as mesas ;)</h2>
+        <h2>Você pode criar um registro como cliente e seguir o as informações de cadastro abaixo para login como Adm:</h2>
+        <h3>
+          <b>AdmEmail:</b> kitchenadm@email.com
+        </h3>
+        <h3>
+          <b>AdmSenha:</b> adm.
+        </h3>
         <br />
         <h2>
-          Foi construído com o objetivo de conectar diretamente os pedidos das mesas a cozinha do restaurante.
-          Possibilita um acesso rápido aos pedidos por parte dos cozinheiros e uma resposta igualmente rápida para os clientes.
+          Visite o perfil no github, onde o projeto está pinado e leia o Read.me do projeto para saber como rodar na sua máquina ;)
         </h2>
       </ContentBox>
 

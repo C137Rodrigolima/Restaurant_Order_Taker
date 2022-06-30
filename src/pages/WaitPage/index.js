@@ -48,10 +48,8 @@ export default function WaitPage(){
   })
 
   function confirmAndLogout(data){
-    if(data){
-      console.log("teste");
-      // socket.emit("new_order");
-      releaseLogout();
+    if(data.table === order.table){
+      releaseLogout()
     }
   }
 

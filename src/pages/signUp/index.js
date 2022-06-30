@@ -84,7 +84,7 @@ export default function SignUp(){
           required
         />
         <Input 
-          placeholder="Confirm Password"
+          placeholder="Confirme a Senha"
           type="password"
           onChange={(e) => handleChange(e)}
           name="confirmation"

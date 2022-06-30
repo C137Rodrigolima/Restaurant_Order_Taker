@@ -1,70 +1,85 @@
-# Getting Started with Create React App
+# Restaurant Order Taker
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A order taker to a restaurante with page for the client and administrator!
 
-## Available Scripts
+Try it now [here on deploy](https://restaurant-order-taker.vercel.app)
 
-In the project directory, you can run:
+On deploy login as Adm with the credentials above to test bouth pages
+```
+AdmEmail: kitchenadm@email.com
+AdmPassword: adm
+```
 
-### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## About
 
-### `npm test`
+This App has the objective to provide a faster response to the client orders, what is extremally necessary on a restaurant's kitchen.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+By using this App, the restaurant can automate the experience for the user to make his orders, and be faster in receive the response from the kitchen.
 
-### `npm run build`
+The Kitchen is automatically connected with all tables in the restaurant, while the client is connected only with his table. 
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Below are the `already implemented` features on this App:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Client Side:
+- Sign Up client.
+- Sign In client.
+- Main page were the client can see and choose through the options of menu, and his Table.
+- Wait Page, where the client confirms and wait for his order.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Adm side:
+- Sign In Adm.
+- Main page to receive the orders in cascade.
+- Confirmation to table orders that perform logout to client (they don't need to care with it).
 
-### `npm run eject`
+Below are the `not yet implemented` features on this App:
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+- feat score to options.
+- feat client comments.
+- feat cancel order.
+- feat update order.
+- Add more than one order types.
+- Open a React-modal to confirm orders.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Technologies
+The following tools and frameworks were used in the construction of the project:<br>
+<p>
+  <img style='margin: 5px;' src="https://img.shields.io/badge/react-app%20-%2320232a.svg?&style=for-the-badge&color=60ddf9&logo=react&logoColor=%2361DAFB"/>
+  <img style='margin: 5px;' src="https://img.shields.io/badge/-socket.io-informational?style=for-the-badge"/>
+  <img style='margin: 5px;' src='https://img.shields.io/badge/axios%20-%2320232a.svg?&style=for-the-badge&color=informational'>
+  <img style='margin: 5px;' src="https://img.shields.io/badge/react_route%20-%2320232a.svg?&style=for-the-badge&logo=react&logoColor=%2361DAFB"/>
+  <img style='margin: 5px;' src='https://img.shields.io/badge/styled-components%20-%2320232a.svg?&style=for-the-badge&color=b8679e&logo=styled-components&logoColor=%3a3a3a'>
+  
+</p>
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## How to run
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
-## Learn More
+First of all, follow the instructions to [run API repository click here](https://github.com/C137Rodrigolima/Restaurant_Order_Taker-BackEnd)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+1. Clone this repository.
+2. Create a new archive named `.env` in the project folder and put on it:
+```
+REACT_APP_BASE_URL=http://localhost:5000
+```
+3. Install dependencies
+```bash
+npm i
+```
+4. Run the front-end with
+```bash
+npm start
+```
+5. You can optionally build the project running
+```bash
+npm run build
+```
+6. Finally access http://localhost:3000 on your favorite browser.
+7. Open a new tab to `AdmLogin`: It's already Registered.
+```
+AdmEmail: adm@email.com
+AdmPassword: adm
+```
+8. Register as client on `userLogin`, choose your table, options from menu and see through the pages how they're connected.
