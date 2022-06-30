@@ -23,7 +23,7 @@ export default function SignIn(){
 
   useEffect(()=>{
     if(token){
-      navigate("/menu")
+      navigate("/")
     }
   }, [])
 
