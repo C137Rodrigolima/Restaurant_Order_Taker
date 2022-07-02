@@ -19,9 +19,7 @@ export default function Main(){
   const [options, setOptions] = useState([]);
   const [order, setOrder] = useState([]);
   const [openTable, setOpenTable] = useState(false);
-  const [allTables] = useState([
-    "A", "B", "C", "D", "E"
-  ])
+  const [allTables] = useState(["A", "B", "C", "D", "E"]);
   const [clientTable, setClientTable] = useState("");
 
   useEffect(()=> getOptions(), [token]);
@@ -86,11 +84,18 @@ export default function Main(){
       confirmAction();
       return;
     }
+
+    const message = filterOptions();
+    if(!window.confirm(message)){
+      setDisabled(false);
+      return;
+    }
     try {
       await api.postOrder({
       table: clientTable,
       optionsIds: order
       }, token);
+      
       socket.emit("new_order");
       navigate("/order-waiting");
     } catch (error) {
@@ -99,11 +104,29 @@ export default function Main(){
     }
   }
 
-  function confirmAction() {
-    let confirmaction = window
-    .confirm("Not logged yet, pls do Log in before ;)");
+  function filterOptions(){
+    const choosenOptions = {options: "", Totalprice: 0};
+    for(let i=0; i<options.length; i++){
+      if(order.includes(options[i].id)){
+        choosenOptions.options += `${options[i].name}, `;
+        choosenOptions.Totalprice += parseFloat(options[i].price)
+      }
+    };
+    return constructConfirmationMessage(choosenOptions);
+  }
 
-    if (confirmaction) {
+  function constructConfirmationMessage(choosenOptions) {
+    const message = 
+    `Confirmar pedido:
+    ${choosenOptions.options} 
+    para mesa ${clientTable}
+    Preço Total: R$ ${choosenOptions.Totalprice.toFixed(2).replace(".", ",")}`;
+    return message;
+  }
+
+  function confirmAction() {
+    if (window
+      .confirm("Not logged yet, pls do Log in before ;)")) {
       setDisabled(false);
       navigate("/signin");
     }
