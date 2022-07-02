@@ -42,7 +42,7 @@ export default function About(){
         </h2>
         <br />
         <h1>Para testar:</h1>
-        <h2>Abra uma guia no login de usuário e outra como administrador, para testar a conexão entre a cozinha e as mesas ;)</h2>
+        <h2>Abra uma guia no login de usuário e outra como administrador, para testar a conexão entre a cozinha e as mesas.</h2>
         <h2>Você pode criar um registro como cliente e seguir o as informações de cadastro abaixo para login como Adm:</h2>
         <h3>
           <b>AdmEmail:</b> kitchenadm@email.com
@@ -50,6 +50,8 @@ export default function About(){
         <h3>
           <b>AdmSenha:</b> adm.
         </h3>
+
+        <h2>Lembre-se de abrir novas abas para simular a entrada de novos usuários ;)</h2>
         <br />
         <h2>
           Visite o perfil no github, onde o projeto está pinado e leia o Read.me do projeto para saber como rodar na sua máquina ;)

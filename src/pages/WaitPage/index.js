@@ -28,6 +28,7 @@ export default function WaitPage(){
       const totalPrice = calcPrice(response.data.optionOrder);
       setPrice(totalPrice);
       setOrder(response.data);
+      console.log(response.data.table);
       socket.emit("join_table", response.data.table);
     }).catch ((error)=> {
       console.log(error);
@@ -44,18 +45,16 @@ export default function WaitPage(){
   }
 
   socket.on("Order_Coming", (data)=>{
-    confirmAndLogout(data);
-  })
-
-  function confirmAndLogout(data){
-    if(data.table === order.table){
+    // console.log(data)
+    console.log(data.table + " " + order.table);
+    if(data.table == order.table){
       releaseLogout()
     }
-  }
+  })
 
   function releaseLogout(){
     signOut();
-    navigate("/")
+    navigate("/");
   }
 
   if(!order.table){
